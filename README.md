@@ -29,7 +29,9 @@ uv run ./src/csv_processing/main.py \
 --files ./tests/integration/data/empl_integration_01.csv ./tests/integration/data/empl_integration_02.csv
 ```
 
-2.2 Установка и запуск как скрипта (`[project.scripts]` в `pyproject.toml`)
+Если всё работает переходите к пункту 3.
+
+2.2 Альтернативный вариант. Установка и запуск как скрипта (`[project.scripts]` в `pyproject.toml`)
 
 ```bash
 uv venv && uv sync
