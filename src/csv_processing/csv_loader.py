@@ -13,7 +13,7 @@ class CSVLoader:
         """
         self.files = files
 
-    def load(self):
+    def load(self, **kwargs):
         """
         Validate CSV files and return generator of rows
         """
@@ -27,17 +27,14 @@ class CSVLoader:
                 raise FileNotFoundError(f"File is not found: {file}")
 
             # Open file and return rows as generator
-            try:
-                with open(file) as csvfile:
-                    reader = csv.DictReader(csvfile)
-                    # Get the number of fields from the header
-                    num_fields = len(reader.fieldnames) if reader.fieldnames else 0
-                    for i, row in enumerate(reader):
-                        # Check if the row has the correct number of fields
-                        if len(row) != num_fields:
-                            raise ValueError(
-                                f"Invalid CSV file detected {file}: row {i} has a different number of fields than the header, expected {num_fields} but got {len(row)}"
-                            )
-                        yield row
-            except csv.Error as e:
-                raise ValueError(f"Invalid CSV file detected {file}: {e}") from e
+            with open(file) as csvfile:
+                reader = csv.DictReader(csvfile, **kwargs)
+                # Get the number of fields from the header
+                num_fields = len(reader.fieldnames) if reader.fieldnames else 0
+                for i, row in enumerate(reader):
+                    # Check if the row has the correct number of fields
+                    if len(row) != num_fields:
+                        raise ValueError(
+                            f"Invalid CSV file detected {file}: row {i} has a different number of fields than the header, expected {num_fields} but got {len(row)}"
+                        )
+                    yield row
