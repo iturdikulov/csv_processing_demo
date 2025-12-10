@@ -19,8 +19,8 @@ def test_create_performance_report():
     average_performance_dict = dict(average_performance)
 
     assert average_performance_dict == {
-        "manager": "0.93",
-        "developer": "0.80",
+        "manager": 0.925,
+        "developer": 0.8,
     }
 
 
@@ -40,7 +40,7 @@ def test_create_performance_report_missing_keys(caplog):
     # Convert to dictionary for easier comparison
     average_performance_dict = dict(average_performance)
 
-    assert average_performance_dict == {"manager": "0.90", "developer": "0.00"}  # 0.9 / 1
+    assert average_performance_dict == {"manager": 0.9, "developer": 0.0}  # 0.9 / 1
     assert "Skipping row" in caplog.text
 
 
@@ -59,7 +59,7 @@ def test_create_performance_report_invalid_values(caplog):
     # Convert to dictionary for easier comparison
     average_performance_dict = dict(average_performance)
 
-    assert average_performance_dict == {"manager": "0.90"}
+    assert average_performance_dict == {"manager": 0.9}
     assert "Skipping row" in caplog.text
 
 

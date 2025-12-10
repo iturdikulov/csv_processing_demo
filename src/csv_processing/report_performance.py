@@ -22,7 +22,7 @@ class PerformanceReport:
         self.data_generator = data_generator
         self.headers = ("position", "performance")
 
-    def create(self) -> list[tuple[str, str]]:
+    def create(self) -> list[tuple[str, float]]:
         """
         Create a sorted performance report from the data generator.
         """
@@ -38,7 +38,7 @@ class PerformanceReport:
 
         # Calculate average performance for each position
         average_performance = [
-            (position, format(mean(performances), ".2f"))
+            (position, mean(performances))
             for position, performances in pos_performances.items()
             if performances
         ]

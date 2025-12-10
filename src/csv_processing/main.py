@@ -54,7 +54,7 @@ def main():
     table = performance_report.create()
 
     # Print report to standard output
-    output = tabulate(table, headers=performance_report.headers, tablefmt="outline")
+    output = tabulate(table, headers=performance_report.headers, tablefmt="outline", floatfmt=".2f")
 
     print(output)
 
