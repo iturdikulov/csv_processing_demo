@@ -44,3 +44,18 @@ exclude_also = [
     'class .*\bProtocol\):',
     '@(abc\.)?abstractmethod',
 ]
+
+[tool.basedpyright]
+typeCheckingMode = "basic"
+include = ["src"]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+    "src/experimental",
+    "src/typestubs"
+]
+
+reportMissingImports = "error"
+reportMissingTypeStubs = false
+
+pythonVersion = "3.14"
+pythonPlatform = "Linux"
