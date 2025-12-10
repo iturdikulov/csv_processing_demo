@@ -25,7 +25,8 @@ def args_init() -> Namespace:
 
     parser.add_argument(
         "--files",
-        action="append",
+        action="extend",
+        nargs="+",
         required=True,
         help="File(s) to process, use multiple `--files` flags if you need to\
                 process many files.",
