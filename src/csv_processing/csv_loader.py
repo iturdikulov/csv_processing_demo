@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 from typing import final
 
+
 @final
 class CSVLoader:
     """
