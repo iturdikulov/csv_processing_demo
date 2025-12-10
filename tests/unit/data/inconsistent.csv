@@ -1,0 +1,8 @@
+id,name,price,in_stock,"description"
+1,Widget A,19.99,TRUE,"Contains: "nuts, bolts"
+2,"Widget B",24.50,FALSE,Missing quote here
+3,Widget C,12.75,TRUE,"Escaped \"quote\" and
+newline",extra_column
+4,Widget D,,TRUE,No price here
+5,"Widget, E",39.99,FALSE,"Comma in name"
+6,Widget F,8.25,TRUE,Uneven,columns,everywhere
