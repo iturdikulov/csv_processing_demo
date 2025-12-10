@@ -43,11 +43,16 @@ def main():
     data_generator = csv_loader.load()
 
     # Generate report for tabulate
-    performance_report = PerformanceReport(data_generator)
+    if args.report == ReportType.PERFORMANCE:
+        performance_report = PerformanceReport(data_generator)
+    else:
+        raise NotImplementedError(f"Report type {args.report} is not implemented")
     table = performance_report.create()
 
     # Print report to standard output
-    print(tabulate(table, headers=performance_report.headers, tablefmt="outline"))
+    output = tabulate(table, headers=performance_report.headers, tablefmt="outline")
+
+    print(output)
 
 
 if __name__ == "__main__":
