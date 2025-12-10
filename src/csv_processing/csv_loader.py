@@ -1,7 +1,9 @@
+from collections.abc import Generator
 import csv
 from pathlib import Path
+from typing import final
 
-
+@final
 class CSVLoader:
     """
     CSV files loader, with path validation.
@@ -11,30 +13,31 @@ class CSVLoader:
         """
         Initialize class with files as list of strings.
         """
-        self.files = files
+        self.files = [Path(f) for f in files]
 
-    def load(self, **kwargs):
+    def load(self, **kwargs) -> Generator[dict[str, str], None, None]:
         """
         Validate CSV files and return generator of rows
         """
         for file in self.files:
-            # Auto-convert str to path
-            if isinstance(file, str):
-                file = Path(file)
-
             # Verify file exists
             if not file.is_file():
                 raise FileNotFoundError(f"File is not found: {file}")
 
             # Open file and return rows as generator
-            with open(file) as csvfile:
+            with open(file, mode="r", newline="", encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile, **kwargs)
-                # Get the number of fields from the header
-                num_fields = len(reader.fieldnames) if reader.fieldnames else 0
+                fieldnames = reader.fieldnames
+                if not fieldnames:
+                    raise ValueError(f"CSV file {file} is empty or has no header.")
+                num_fields = len(fieldnames)
+
                 for i, row in enumerate(reader):
                     # Check if the row has the correct number of fields
+                    # Use actual fieldnames length to compare with row length
                     if len(row) != num_fields:
                         raise ValueError(
-                            f"Invalid CSV file detected {file}: row {i} has a different number of fields than the header, expected {num_fields} but got {len(row)}"
+                            f"Invalid CSV file detected {file}: row {i + 2} has a different number of fields than the header. "
+                            f"Expected {num_fields} but got {len(row)} for row: {row}"
                         )
                     yield row
