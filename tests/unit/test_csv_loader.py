@@ -48,3 +48,14 @@ def test_load_inconsistent_csv(lazy_shared_datadir: Path):
     loader = CSVLoader(files=[csv_file])
     with pytest.raises(ValueError):
         list(loader.load())
+
+
+def test_load_no_header_csv(lazy_shared_datadir: Path):
+    """
+    Test that CSVLoader raises ValueError for an CSV file with inconsistent rows.
+    """
+    csv_file: Path = lazy_shared_datadir / "no_header.csv"
+
+    loader = CSVLoader(files=[csv_file])
+    with pytest.raises(ValueError):
+        list(loader.load())
