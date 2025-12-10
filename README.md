@@ -6,7 +6,7 @@
 
 ### Требования
 
-- [Python[(https://www.python.org/downloads/) 3.13 - 3.14+ (протестировано, но может работать и на предыдущих версиях)
+- [Python](https://www.python.org/downloads/) 3.13 - 3.14+ (протестировано, но может работать и на предыдущих версиях)
 - Рекомендуется пакетный менеджер [uv](https://github.com/astral-sh/uv)
 
 ### Установка и запуск
@@ -18,8 +18,8 @@
 1. Склонируйте репозиторий
 
 ```bash
-git clone <URL репозитория>
-cd csv-processing-demo
+git clone https://github.com/iturdikulov/csv_processing_demo.git
+cd csv_processing_demo
 ```
 
 2.1 Запустите при помощи `uv` (автоматически создаться `env` окружение, подтянуться зависимости.
@@ -45,7 +45,7 @@ python -m venv .venv
 # активация под Linux/bash, у вас может быть другой шелл и другая команда
 source .venv/bin/activate  
 
-pip install -r pyproject.toml
+pip install -e .
 python src/csv_processing/main.py \
 --files ./tests/integration/data/empl_integration_01.csv -files ./tests/integration/data/empl_integration_02.csv
 ```
