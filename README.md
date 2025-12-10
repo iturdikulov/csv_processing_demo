@@ -47,7 +47,7 @@ source .venv/bin/activate
 
 pip install -e .
 python src/csv_processing/main.py \
---files ./tests/integration/data/empl_integration_01.csv -files ./tests/integration/data/empl_integration_02.csv
+--files ./tests/integration/data/empl_integration_01.csv ./tests/integration/data/empl_integration_02.csv
 ```
 
 ## Формат CSV
