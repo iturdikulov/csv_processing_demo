@@ -2,6 +2,8 @@
 
 Это CLI-утилита на Python для обработки CSV-файлов с данными о производительности сотрудников и создания сводных отчётов.
 
+![Демонстрация обработки CSV в терминале](demo.gif)
+
 ## Быстрый старт
 
 ### Требования
@@ -24,9 +26,18 @@ cd csv_processing_demo
 
 2.1 Запустите при помощи `uv` (автоматически создаться `env` окружение, подтянуться зависимости.
 
+Набор файлов из интеграционных тестов:
+
 ```bash
 uv run ./src/csv_processing/main.py \
 --files ./tests/integration/data/empl_integration_01.csv ./tests/integration/data/empl_integration_02.csv
+```
+
+Набор файлов из ТЗ:
+
+```bash
+uv run ./src/csv_processing/main.py \
+--files ./tests/unit/data/employees1.csv ./tests/unit/data/employees2.csv
 ```
 
 Если всё работает переходите к пункту 3.
