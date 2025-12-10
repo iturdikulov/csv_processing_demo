@@ -1,7 +1,46 @@
 [project]
-name = "csv-processing-demo"
-version = "0.1.0"
+name = "csv-processing"
+version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
+authors = [
+    { name = "Inom T.", email = "inom@iturdikulov.com" }
+]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "pytest-cov>=7.0.0",
+    "pytest-datadir>=1.8.0",
+    "pytest-xdist>=3.8.0",
+    "tabulate>=0.9.0",
+]
+
+[project.scripts]
+csv-processing = "csv_processing:main"
+
+[build-system]
+requires = ["uv_build>=0.9.12,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "src",
+]
+addopts = """
+    --cov=src
+    --show-capture=all
+    -n auto
+"""
+
+[tool.coverage.report]
+exclude_also = [
+    'def __repr__',
+    'if self.debug:',
+    'if settings.DEBUG',
+    'raise AssertionError',
+    'raise NotImplementedError',
+    'if 0:',
+    'if __name__ == .__main__.:',
+    'if TYPE_CHECKING:',
+    'class .*\bProtocol\):',
+    '@(abc\.)?abstractmethod',
+]
