@@ -18,7 +18,7 @@ class CSVLoader:
 
     def load(self, **kwargs) -> Generator[dict[str, str], None, None]:
         """
-        Validate CSV files and return generator of rows
+        Validate CSV files and return generator of rows.
         """
         for file in self.files:
             # Verify file exists

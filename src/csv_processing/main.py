@@ -16,7 +16,7 @@ SETTINGS = {"DEFAULT_REPORT": ReportType.PERFORMANCE}
 def args_init() -> Namespace:
     """
     Initialize argument parser with required --files flag(s) and optional
-    --report flag to show it
+    --report flag to show it.
     """
     parser = ArgumentParser(
         prog="csv-processing-demo",
@@ -35,6 +35,9 @@ def args_init() -> Namespace:
 
 
 def main():
+    """
+    CSV processing CLI utility entrypoint.
+    """
     # Initialize CLI args
     args = args_init()
 
