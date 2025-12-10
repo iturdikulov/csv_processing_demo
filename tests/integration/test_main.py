@@ -16,9 +16,7 @@ def test_main_success(lazy_shared_datadir: Path, capsys):
             "csv_processing_demo",
             "--files",
             str(lazy_shared_datadir / "empl_integration_01.csv"),
-            "--files",
             str(lazy_shared_datadir / "empl_integration_02.csv"),
-            "--files",
             str(lazy_shared_datadir / "empl_integration_03.csv"),
         ],
     ):
