@@ -45,7 +45,7 @@ uv run ./src/csv_processing/main.py \
 2.2 Альтернативный вариант. Установка и запуск как скрипта (`[project.scripts]` в `pyproject.toml`)
 
 ```bash
-uv venv && uv sync
+uv venv && uv sync --no-dev
 csv-processing \
 --files ./tests/integration/data/empl_integration_01.csv ./tests/integration/data/empl_integration_02.csv
 ```
@@ -71,6 +71,33 @@ python src/csv_processing/main.py \
 - `performance`: Показатель производительности (числовое значение).
 
 Файл обязательно должен содержать заголовок (header). Смотрите примеры в директории `./tests/integration/data/`.
+
+## Для разработчиков
+
+Нужно доустановить зависимости для проверки и анализа кода:
+
+```bash
+# Если используется пакетный менеджер uv
+uv sync  
+# Если используется pip
+pip install . --group dev
+```
+
+Для проверки типов и анализа кода нужно использовать утилиты `ruff` и `basedpyright`.
+
+```bash
+# Линтер/форматтер ruff настройки по умолчанию
+ruff check
+
+# Сначала проверяем изменения, а потом форматируем
+ruff format --diff
+ruff format
+
+# Проверка типов, конфиг в pyproject.toml
+basedpyright 
+```
+
+TODO: настроить pre-commit и обновить инструкцию.
 
 ## Тестирование
 
