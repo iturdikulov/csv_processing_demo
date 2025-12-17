@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, Namespace
 from enum import StrEnum
+from typing import Literal, TypedDict
 from tabulate import tabulate
 
 from csv_processing import CSVLoader
@@ -10,7 +11,19 @@ class ReportType(StrEnum):
     PERFORMANCE = "performance"
 
 
-SETTINGS = {"DEFAULT_REPORT": ReportType.PERFORMANCE}
+class Settings(TypedDict):
+    allowed_reports: list[ReportType]
+    # Tabulate support more types, but for us enough this 3 ones
+    report_table_format: Literal["plain", "simple", "outline"]
+    report_float_format: str
+
+
+# Global settings
+SETTINGS = Settings(
+    allowed_reports=[ReportType.PERFORMANCE],
+    report_table_format="outline",
+    report_float_format=".2f",
+)
 
 
 def args_init() -> Namespace:
@@ -31,7 +44,7 @@ def args_init() -> Namespace:
         help="File(s) to process, use multiple `--files` flags if you need to\
                 process many files.",
     )
-    parser.add_argument("--report", default=SETTINGS["DEFAULT_REPORT"])
+    parser.add_argument("--report", choices=[SETTINGS.allowed_report])
     return parser.parse_args()
 
 
@@ -44,13 +57,15 @@ def main():
     csv_loader = CSVLoader(args.files)
     data_generator = csv_loader.load()
 
-    if args.report == ReportType.PERFORMANCE:
-        performance_report = PerformanceReport(data_generator)
-    else:
-        raise NotImplementedError(f"Report type {args.report} is not implemented")
+    performance_report = PerformanceReport(data_generator)
     table = performance_report.create()
 
-    output = tabulate(table, headers=performance_report.headers, tablefmt="outline", floatfmt=".2f")
+    output = tabulate(
+        table,
+        headers=performance_report.headers,
+        tablefmt=SETTINGS.report_table_format,
+        floatfmt=SETTINGS.report_float_format,
+    )
 
     print(output)
 
