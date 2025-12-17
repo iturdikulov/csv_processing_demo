@@ -39,21 +39,17 @@ def main():
     """
     CSV processing CLI utility entrypoint.
     """
-    # Initialize CLI args
     args = args_init()
 
-    # Load CSV files into generator
     csv_loader = CSVLoader(args.files)
     data_generator = csv_loader.load()
 
-    # Generate report for tabulate
     if args.report == ReportType.PERFORMANCE:
         performance_report = PerformanceReport(data_generator)
     else:
         raise NotImplementedError(f"Report type {args.report} is not implemented")
     table = performance_report.create()
 
-    # Print report to standard output
     output = tabulate(table, headers=performance_report.headers, tablefmt="outline", floatfmt=".2f")
 
     print(output)
