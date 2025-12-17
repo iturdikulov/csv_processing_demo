@@ -1,4 +1,3 @@
-import pytest
 from csv_processing.report_performance import PerformanceReport
 
 
@@ -6,6 +5,7 @@ def test_create_performance_report():
     """
     Test that PerformanceReport successfully creates a report.
     """
+
     # Mock data generator
     def data_generator():
         yield {"position": "manager", "performance": "0.9"}
@@ -28,6 +28,7 @@ def test_create_performance_report_missing_keys(caplog):
     """
     Test that PerformanceReport handles missing keys gracefully.
     """
+
     # Mock data generator
     def data_generator():
         yield {"position": "manager", "performance": "0.9"}
@@ -48,6 +49,7 @@ def test_create_performance_report_invalid_values(caplog):
     """
     Test that PerformanceReport handles invalid values gracefully.
     """
+
     # Mock data generator
     def data_generator():
         yield {"position": "manager", "performance": "0.9"}
@@ -67,6 +69,7 @@ def test_create_performance_report_no_data():
     """
     Test that PerformanceReport handles no data gracefully.
     """
+
     # Mock data generator
     def data_generator():
         yield from []

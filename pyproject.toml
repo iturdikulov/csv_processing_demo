@@ -59,3 +59,9 @@ reportMissingTypeStubs = false
 
 pythonVersion = "3.14"
 pythonPlatform = "Linux"
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.36.1",
+    "ruff>=0.14.9",
+]

@@ -3,12 +3,10 @@ import logging
 from statistics import mean
 from collections import defaultdict
 from collections.abc import Generator
-from typing import final
 
 logger = logging.getLogger(__name__)  # default level is warning
 
 
-@final
 class PerformanceReport:
     """
     A class to generate a performance report from a data generator.
@@ -19,8 +17,8 @@ class PerformanceReport:
         Initialize the PerformanceReport with a data generator and
         report-specific headers.
         """
-        self.data_generator = data_generator
-        self.headers = ("position", "performance")
+        self.data_generator: Generator[dict[str, str], None, None] = data_generator
+        self.headers: tuple[str, str] = ("position", "performance")
 
     def create(self) -> list[tuple[str, float]]:
         """
@@ -28,7 +26,7 @@ class PerformanceReport:
         """
         pos_performances: defaultdict[str, list[float]] = defaultdict(list)
 
-        # Fill total performance per position
+        # Fill total performance per position for each position group
         for row in self.data_generator:
             try:
                 performance = float(row.get("performance", 0.0))
@@ -36,12 +34,11 @@ class PerformanceReport:
             except (KeyError, ValueError) as e:
                 logger.warning(f"Skipping row in performance report, {row}: {e}")
 
-        # Calculate average performance for each position
+        # Calculate average performance for each position group
         average_performance = [
             (position, mean(performances))
             for position, performances in pos_performances.items()
             if performances
         ]
 
-        # Return reverse-sorted report by performance field
         return sorted(average_performance, key=lambda x: x[1], reverse=True)

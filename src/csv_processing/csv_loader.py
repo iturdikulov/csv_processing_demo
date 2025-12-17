@@ -21,11 +21,10 @@ class CSVLoader:
         Validate CSV files and return generator of rows.
         """
         for file in self.files:
-            # Verify file exists
             if not file.is_file():
                 raise FileNotFoundError(f"File is not found: {file}")
 
-            # Open file and return rows as generator
+            # Open file and return rows as generator to avoid memory issues
             with open(file, mode="r", newline="", encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile, **kwargs)
                 fieldnames = reader.fieldnames
