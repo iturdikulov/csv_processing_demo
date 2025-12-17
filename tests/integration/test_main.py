@@ -63,5 +63,5 @@ def test_main_invalid_report(lazy_shared_datadir):
             "invalid_report",
         ],
     ):
-        with pytest.raises(NotImplementedError):
+        with pytest.raises(SystemExit):
             main()
