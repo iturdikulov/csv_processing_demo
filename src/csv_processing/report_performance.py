@@ -3,12 +3,10 @@ import logging
 from statistics import mean
 from collections import defaultdict
 from collections.abc import Generator
-from typing import final
 
 logger = logging.getLogger(__name__)  # default level is warning
 
 
-@final
 class PerformanceReport:
     """
     A class to generate a performance report from a data generator.
@@ -19,8 +17,8 @@ class PerformanceReport:
         Initialize the PerformanceReport with a data generator and
         report-specific headers.
         """
-        self.data_generator = data_generator
-        self.headers = ("position", "performance")
+        self.data_generator: Generator[dict[str, str], None, None] = data_generator
+        self.headers: tuple[str, str] = ("position", "performance")
 
     def create(self) -> list[tuple[str, float]]:
         """
